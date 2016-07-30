@@ -4,6 +4,7 @@ class WelcomePage extends React.Component {
   constructor() {
     super()
     this.state = {}
+    window.gMaps().then(() => this.setState({google: window.google}))
   }
 
   cancelRequest() {
@@ -15,23 +16,8 @@ class WelcomePage extends React.Component {
   }
 
   handleInputChange(event) {
-    this.cancelRequest();
-
-    const term = event.target.value;
-    if (term.length < 3) {
-      return;
-    }
-    const url = `/searches?search[query]=${encodeURIComponent(term)}`;
-    const request = fetch(url);
-
-    this.setState({
-      request: request,
-    });
-
-    request
-      .then((results) => results.json())
-      .then((results) => (this.state.request == request) && this.handleFetch(results))
-      .catch(this.handleError.bind(this));
+    let {lat, lng} = event.location
+    this.setState({lat, lng})
   }
 
   handleError(xhr) {
@@ -54,10 +40,13 @@ class WelcomePage extends React.Component {
   render() {
     return (
       <div className="WelcomePage">
-        <input
-          placeholder="Search"
-          onChange={this.handleInputChange.bind(this)}
+        { this.state.google &&
+        <GeoSuggestionInput
+          onSuggestSelect={this.handleInputChange.bind(this)}
+          location={new google.maps.LatLng(-37, 145)}
         />
+        }
+        {this.state.lat}, {this.state.lng}
       </div>
     );
   }

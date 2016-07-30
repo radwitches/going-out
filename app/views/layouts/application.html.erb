@@ -2,10 +2,31 @@
 <html>
   <head>
     <title>Going Out?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVOcnRelxxJ7mKZsrT3n4LjC2DXABqdgg&callback=initGMaps&libraries=places"
+    async
+    defer
+    ></script>
+    <script>
+      window.gMapsPromise = new Promise(function(resolve, reject) {
+        window.gMapsResolve = resolve;
+        window.gMapsReject = reject;
+      })
+
+      function initGMaps() {
+        window.gMapsResolve()
+      }
+
+      function gMaps() {
+        return gMapsPromise;
+      }
+
+    </script>
   </head>
 
   <body>
