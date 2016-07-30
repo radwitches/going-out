@@ -1,24 +1,25 @@
-# README
+## What does this do?
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Helps you plan an outing by telling you
+what amenities there are at nearby destinations.
 
-Things you may want to cover:
+## Models
 
-* Ruby version
+Destinations
+  - name
+  - location
 
-* System dependencies
+Features
+  - name e.g. dog park, water, toilet
+  - location from destination
 
-* Configuration
+## Data sources
 
-* Database creation
+ * Parks managed by parks victoria, from https://www.data.vic.gov.au/data/dataset/pv-parkres-govhack-2016
 
-* Database initialization
+## Planned data sources
 
-* How to run the test suite
+ * More parks!
+ * Any features at all
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
