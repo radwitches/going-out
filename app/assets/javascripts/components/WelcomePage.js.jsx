@@ -7,36 +7,9 @@ class WelcomePage extends React.Component {
     window.gMaps().then(() => this.setState({google: window.google}))
   }
 
-  cancelRequest() {
-    this.setState({
-      request: null,
-      error: null,
-      results: null,
-    })
-  }
-
   handleInputChange(event) {
-    let {lat, lng} = event.location
-    this.setState({lat, lng})
+    this.setState({location: event.location})
   }
-
-  handleError(xhr) {
-    // Only show errors if it's for the current request.
-    if (this.state.request == xhr) {
-      this.setState({
-        request: null,
-        error: xhr.statusText,
-      });
-    }
-  }
-
-  handleFetch(results) {
-    this.setState({
-      request: null,
-      results: results,
-    })
-  }
-
   render() {
     return (
       <div className="WelcomePage">
@@ -46,7 +19,9 @@ class WelcomePage extends React.Component {
           location={new google.maps.LatLng(-37, 145)}
         />
         }
-        {this.state.lat}, {this.state.lng}
+        {this.state.location &&
+        <span>{this.state.location.lat}, {this.state.location.lng}</span>
+        }
       </div>
     );
   }
