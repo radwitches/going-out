@@ -9,7 +9,11 @@ body {
   background-position: center;
   font-family: 'Luckiest Guy', cursive;
 }
-
+table.results {
+  background-color: #eee;
+  max-width: 600px;
+  margin: auto;
+}
 .WelcomePage {
 	max-width: 820px;
   margin: 1em auto;

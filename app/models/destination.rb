@@ -22,7 +22,7 @@ class Destination < ApplicationRecord
     )
 
     super(opts).merge({
-      centre: geom.centroid.as_json,
+      centre: {lat: geom.centroid.x, lng: geom.centroid.y},
       distance: point.distance(geom),
       amenities: amenities
     })

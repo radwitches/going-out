@@ -31,15 +31,6 @@ class WelcomePage extends React.Component {
             placeholder="Start typing to find a location"
           />
           }
-
-          {this.state.location &&
-          <span>{this.state.location.lat}, {this.state.location.lng}</span>
-          }
-          {this.state.parks.map((park, idx) =>
-            <div key={idx}>
-              {idx} {park.name} {JSON.stringify(park.amenities)}
-            </div>
-          )}
         </div>
         <div className="facilities">
           <h2>What facilities do you care about?</h2>
@@ -82,6 +73,30 @@ class WelcomePage extends React.Component {
             </div>
           </form>
         </div>
+        {this.state.parks.length &&
+        <table className="results">
+          <thead>
+            <tr>
+            <th>Park name</th>
+            <th>Amenities</th>
+            </tr>
+          </thead>
+          <tbody>
+          {this.state.parks.map((park, idx) =>
+            <tr key={idx}>
+              <td>
+                <a
+                  href={`https://www.google.com.au/maps/@${park.centre.lng},${park.centre.lat},15z`}
+                >
+                  {park.name}
+                </a>
+              </td>
+              <td>{park.amenities.slice(0,3).map(a => <img src={a.icon} alt={a.icon_alt} /> )}</td>
+            </tr>
+          )}
+          </tbody>
+        </table>
+        }
       </div>
     );
   }
