@@ -35,11 +35,23 @@ class WelcomePage extends React.Component {
           {this.state.location &&
           <span>{this.state.location.lat}, {this.state.location.lng}</span>
           }
-          {this.state.parks.map((park, idx) =>
-            <div key={idx}>
-              {idx} {park.name} {JSON.stringify(park.amenities)}
+        </div>
+        <div className="weather">
+          <h2>Here's some extra info to help you plan</h2>
+          <div className="grid">
+            <div className="info">
+              <img src="<%= image_url 'clouds-and-sun' %>" alt="clouds and sun"/><br/>
+              <span>17</span>
             </div>
-          )}
+            <div className="info">
+              <img src="<%= image_url 'sun-cream.png' %>" alt="sun-cream"/><br/>
+              <span>UV 3</span>
+            </div>
+            <div className="info">
+              <img src="<%= image_url 'sweater_480' %>" alt="sweater"/><br/>
+              <span>Dress warmly</span>
+            </div>
+          </div>
         </div>
         <div className="facilities">
           <h2>What facilities do you care about?</h2>

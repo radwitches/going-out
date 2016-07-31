@@ -6,8 +6,28 @@ body {
   background-image: image_url('Hyde-Park-Desktop-Wallpapers.jpg');
   background-repeat: no-repeat;
   background-color: #006400;
-  background-position: center;
+  background-position: top center;
   font-family: 'Luckiest Guy', cursive;
+}
+
+
+.grid {
+  width: 100%;
+  list-style: none;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  @for $i from 1 through 100 {
+    .width-#{$i} {
+      width: $i + "%" ;
+    }
+  }
 }
 
 .WelcomePage {
@@ -15,14 +35,29 @@ body {
   margin: 1em auto;
   h1, h2 {
     text-align: center;
-    color:#fff;
-    letter-spacing: 3px;
+    color:#006400;
+    letter-spacing: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
   }
   input[type="text"] {
     border: 2px solid #90ee90;
     padding: 12px;
     font-family: 'Luckiest Guy', cursive;
     font-size: 1.25em;
+  }
+  .weather {
+    .info {
+      width: 32%;
+      text-align: center;
+      background-color: #FFF;
+      border: 2px solid #90ee90;
+      img {
+        max-height: 150px;
+        max-width: 150px;
+        padding-top: 5px
+      }
+    }
   }
   .facilities ul {
     list-style: none;
@@ -98,21 +133,3 @@ body {
   }
 }
 
-.grid {
-  width: 100%;
-  list-style: none;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-flow: row wrap;
-  -webkit-flex-flow: row wrap;
-  justify-content: center;
-  align-items: flex-start;
-  @for $i from 1 through 100 {
-    .width-#{$i} {
-      width: $i + "%" ;
-    }
-  }
-}
