@@ -12,23 +12,25 @@ class Destination < ApplicationRecord
 
   self.primary_key = :gid
 
+  has_many :amenities, through: :destination_amenities
+  has_many :destination_amenities
+
   def as_json(opts)
-    point = RGeo::Cartesian
-      .preferred_factory(srid: 4283)
-      .point(
-        Float(opts.delete(:from_lat)),
-        Float(opts.delete(:from_lng))
-      )
+    point = Point.new(
+      opts.delete(:from_lat),
+      opts.delete(:from_lng)
+    )
 
     super(opts).merge({
       centre: geom.centroid.as_json,
       distance: point.distance(geom),
+      amenities: amenities
     })
   end
 
   def self.near(lat, lng)
     kilometer = 0.02
-    where(<<-SQL
+    includes(:amenities).where(<<-SQL
         ST_DWithin(
             geom,
             ST_GeomFromText(

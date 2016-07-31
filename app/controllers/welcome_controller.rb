@@ -11,4 +11,12 @@ class WelcomeController < ApplicationController
       from_lng: params[:lng]
     )
   end
+
+  def amenities
+    Amenity.near(
+      Destination.find(
+        params[:destination]
+      )
+    )
+  end
 end

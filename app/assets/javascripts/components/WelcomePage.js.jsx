@@ -33,7 +33,7 @@ class WelcomePage extends React.Component {
         }
         {this.state.parks.map((park, idx) =>
           <div key={idx}>
-            {idx} {park.name}
+            {idx} {park.name} {JSON.stringify(park.amenities)}
           </div>
         )}
       </div>
