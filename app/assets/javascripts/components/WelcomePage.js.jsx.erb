@@ -31,10 +31,6 @@ class WelcomePage extends React.Component {
             placeholder="Start typing to find a location"
           />
           }
-
-          {this.state.location &&
-          <span>{this.state.location.lat}, {this.state.location.lng}</span>
-          }
         </div>
         <div className="weather">
           <h2>Here's some extra info to help you plan</h2>
@@ -114,7 +110,7 @@ class WelcomePage extends React.Component {
                   {park.name}
                 </a>
               </td>
-              <td>{park.amenities.slice(0,3).map(a => <img src={a.icon} alt={a.icon_alt} /> )}</td>
+              <td>{park.amenities.slice(0,3).map(a => <img src={a.icon} title={a.icon_alt} alt={a.icon_alt} /> )}</td>
             </tr>
           )}
           </tbody>
