@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: govhack-parks_production
-  username: govhack-parks
-  password: <%= ENV['GOVHACK-PARKS_DATABASE_PASSWORD'] %>
