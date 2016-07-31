@@ -1,0 +1,89 @@
+
+class WelcomePage extends React.Component {
+
+  constructor() {
+    super()
+    this.state = {parks: []}
+    window.gMaps().then(() => this.setState({google: window.google}))
+  }
+
+  handleInputChange(event) {
+    this.setState({parks: []})
+    this.setState({location: event.location});
+    let {lat, lng} = event.location;
+    fetch(`/near?lat=${lat}&lng=${lng}`).
+      then((resp) => resp.json()).
+      then((parks) =>
+        this.setState({parks: parks})
+      )
+  }
+
+  render() {
+    return (
+      <div className="WelcomePage">
+        <div>
+          <h1>Going out today?</h1>
+          <h2>Where would you like to find a park?</h2>
+          { this.state.google &&
+          <GeoSuggestionInput
+            onSuggestSelect={this.handleInputChange.bind(this)}
+            location={new google.maps.LatLng(-37, 145)}
+            placeholder="Start typing to find a location"
+          />
+          }
+
+          {this.state.location &&
+          <span>{this.state.location.lat}, {this.state.location.lng}</span>
+          }
+          {this.state.parks.map((park, idx) =>
+            <div key={idx}>
+              {idx} {park.name} {JSON.stringify(park.amenities)}
+            </div>
+          )}
+        </div>
+        <div className="facilities">
+          <h2>What facilities do you care about?</h2>
+          <form name="facilities">
+            <ul>
+              <li>
+                <input type="checkbox" id="toilets" name="type-of-facility" value="toilets"/>
+                <label htmlFor="toilets">
+                  <img src="<%= image_url 'black-icons/restrooms.jpg' %>"/>Toilets
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="wheelchair" name="type-of-facility"/>
+
+                <label htmlFor="wheelchair">
+                  <img src="<%= image_url 'black-icons/accessiblerestrooms.jpg' %>"/>Accessibility
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="play" name="type-of-facility"/>
+                <label htmlFor="play">
+                  <img src="<%= image_url 'black-icons/playground.jpg' %>"/>Playground
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="bbq" name="type-of-facility"/>
+                <label htmlFor="bbq">
+                  <img src="<%= image_url 'black-icons/bbq.jpg' %>"/>BBQ facilities
+                </label>
+              </li>
+              <li>
+                <input type="checkbox" id="dog" name="type-of-facility"/>
+                <label htmlFor="dog">
+                  <img src="<%= image_url 'black-icons/dogarea.jpg' %>"/>Dog park
+                </label>
+              </li>
+            </ul>
+            <div className="center">
+              <input type="submit" className="myButton" value="Search Now!"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+}
