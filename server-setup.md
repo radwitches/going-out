@@ -24,8 +24,13 @@ mkdir repo
 cd repo
 git init --bare
 
+
+
+
 cat << EOF > hooks/post-receive
 #!/bin/bash
+
+set -e
 
 GIT_DIR=/home/ec2-user/repo
 WORK_TREE=/home/ec2-user/app
@@ -47,8 +52,13 @@ do
         rake db:create
         rake db:migrate
         rake assets:precompile
-        sudo restart puma-manager
-        sudo service nginx restart
+
+        sudo initctl stop app || true
+        sudo cp upstart.conf /etc/init/app.conf
+        sudo initctl start app
+        sudo service nginx stop
+        sudo cp nginx.conf /etc/nginx/nginx.conf
+        sudo service nginx start
         # end deploy tasks
         echo "Git hooks deploy complete"
     else
