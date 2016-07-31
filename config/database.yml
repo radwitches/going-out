@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: govhack-parks_production
-  username: govhack-parks
-  password: <%= ENV['GOVHACK-PARKS_DATABASE_PASSWORD'] %>
+  url: postgres://going_out:going_out@govhack.cw7tb1yzq8oj.ap-southeast-2.rds.amazonaws.com:5432/going_out

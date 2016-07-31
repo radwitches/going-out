@@ -10,7 +10,6 @@ body {
   font-family: 'Luckiest Guy', cursive;
 }
 
-
 .grid {
   width: 100%;
   list-style: none;
@@ -28,6 +27,12 @@ body {
       width: $i + "%" ;
     }
   }
+}
+
+table.results {
+  background-color: #eee;
+  max-width: 600px;
+  margin: auto;
 }
 
 .WelcomePage {
