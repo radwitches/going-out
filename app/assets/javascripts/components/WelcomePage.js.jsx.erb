@@ -23,7 +23,7 @@ class WelcomePage extends React.Component {
       <div className="WelcomePage">
         <div>
           <h1>Going out today?</h1>
-          <h2>Where would you like to find a park?</h2>
+          <h2>Where would you like to visit a park?</h2>
           { this.state.google &&
           <GeoSuggestionInput
             onSuggestSelect={this.handleInputChange.bind(this)}
@@ -56,41 +56,43 @@ class WelcomePage extends React.Component {
         <div className="facilities">
           <h2>What facilities do you care about?</h2>
           <form name="facilities">
-            <ul>
-              <li>
+            <div className="grid">
+              <div className="option">
                 <input type="checkbox" id="toilets" name="type-of-facility" value="toilets"/>
                 <label htmlFor="toilets">
-                  <img src="<%= image_url 'black-icons/restrooms.jpg' %>"/>Toilets
+                  <img src="<%= image_url 'black-icons/restrooms.jpg' %>"/><br/>
+                  Toilets
                 </label>
-              </li>
-              <li>
+              </div>
+              <div className="option">
                 <input type="checkbox" id="wheelchair" name="type-of-facility"/>
 
                 <label htmlFor="wheelchair">
-                  <img src="<%= image_url 'black-icons/accessiblerestrooms.jpg' %>"/>Accessibility
+                  <img src="<%= image_url 'black-icons/accessiblerestrooms.jpg' %>"/><br/>
+                  Accessibility
                 </label>
-              </li>
-              <li>
+              </div>
+              <div className="option">
                 <input type="checkbox" id="play" name="type-of-facility"/>
                 <label htmlFor="play">
-                  <img src="<%= image_url 'black-icons/playground.jpg' %>"/>Playground
+                  <img src="<%= image_url 'black-icons/playground.jpg' %>"/><br/>
+                  Playground
                 </label>
-              </li>
-              <li>
+              </div>
+              <div className="option">
                 <input type="checkbox" id="bbq" name="type-of-facility"/>
                 <label htmlFor="bbq">
-                  <img src="<%= image_url 'black-icons/bbq.jpg' %>"/>BBQ facilities
+                  <img src="<%= image_url 'black-icons/bbq.jpg' %>"/><br/>
+                  BBQs
                 </label>
-              </li>
-              <li>
+              </div>
+              <div className="option">
                 <input type="checkbox" id="dog" name="type-of-facility"/>
                 <label htmlFor="dog">
-                  <img src="<%= image_url 'black-icons/dogarea.jpg' %>"/>Dog park
+                  <img src="<%= image_url 'black-icons/dogarea.jpg' %>"/><br/>
+                  Dog park
                 </label>
-              </li>
-            </ul>
-            <div className="center">
-              <input type="submit" className="myButton" value="Search Now!"/>
+              </div>
             </div>
           </form>
         </div>

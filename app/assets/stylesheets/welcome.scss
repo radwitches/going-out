@@ -64,12 +64,9 @@ table.results {
       }
     }
   }
-  .facilities ul {
-    list-style: none;
-    max-width: 440px;
-    margin: 0 auto;
-    li {
-      height: 40px;
+  .facilities {
+    .option {
+      width: 16%;
       padding: 12px;
       margin: 1em 0;
       font-size: 1.25em;
@@ -86,8 +83,10 @@ table.results {
       }
       label {
         opacity: .6;
+        text-align: center;
+        display: block;
         img {
-          margin-right: 2em;
+          margin-right: 5px;
         }
       }
     }
