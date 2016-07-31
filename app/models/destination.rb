@@ -15,15 +15,29 @@ class Destination < ApplicationRecord
   has_many :amenities, through: :destination_amenities
   has_many :destination_amenities
 
+  def self.field_scope
+    select('
+      gid,
+      name,
+      ST_ASGEOJSON(ST_CENTROID(geom)) as centre
+    ')
+  end
+
   def as_json(opts)
     point = Point.new(
       opts.delete(:from_lat),
       opts.delete(:from_lng)
     )
 
-    super(opts).merge({
-      centre: {lat: geom.centroid.x, lng: geom.centroid.y},
-      distance: point.distance(geom),
+    # coordinates":[144.089384252525,-36.8069131047856]
+    base = super(opts)
+    if attributes[:centre]
+      lat, lng = JSON.parse(attributes[:centre])['coordinates']
+      base = base.merge({
+        centre: {lat: lat, lng: lng},
+      })
+    end
+    base.merge({
       amenities: amenities
     })
   end

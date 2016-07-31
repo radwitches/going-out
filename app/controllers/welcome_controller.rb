@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   end
 
   def near
-    render json: Destination.near(
+    render json: Destination.field_scope.near(
       params[:lat],
       params[:lng]
     ).limit(50).as_json(
